@@ -11,7 +11,11 @@ import (
 func main() {
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("client connected")
-		conn, err := websocket.Upgrade(w, r, nil, 1028, 1028)
+		upgrader := websocket.Upgrader{
+			ReadBufferSize:  1028,
+			WriteBufferSize: 1028,
+		}
+		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			log.Fatal(err)
 		}
