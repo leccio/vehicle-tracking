@@ -1,7 +1,7 @@
 package types
 
 type Obu struct {
-	Id   int
-	Lat  float64
-	Long float64
+	Id   int     `json:"id"`
+	Lat  float64 `json:"lat"`
+	Long float64 `json:"long"`
 }
