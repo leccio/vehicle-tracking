@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"math"
 	"math/rand"
@@ -27,20 +26,29 @@ func main() {
 			log.Fatal(err)
 		}
 
-		go func(conn *websocket.Conn) {
+		go func() {
 			for {
 				lat, long := generateCoords()
 				obu.Lat = lat
 				obu.Long = long
 
-				fmt.Printf("%+v\n", obu)
+				// read messages from the server and print them
+				go func() {
+					_, bytes, err := conn.ReadMessage()
+					if err != nil {
+						log.Fatal(err)
+					}
+					log.Println(string(bytes))
+
+				}()
+
 				if err := conn.WriteJSON(obu); err != nil {
 					log.Fatal(err)
 				}
 
 				time.Sleep(time.Millisecond * 400)
 			}
-		}(conn)
+		}()
 	}
 
 	for {

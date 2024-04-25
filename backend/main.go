@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"time"
 	"vehicle-tracking/backend/types"
 
 	"github.com/gorilla/websocket"
@@ -20,6 +19,10 @@ func main() {
 		}
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
+			log.Fatal(err)
+		}
+
+		if err := conn.WriteMessage(websocket.TextMessage, []byte("connected!")); err != nil {
 			log.Fatal(err)
 		}
 
