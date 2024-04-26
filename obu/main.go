@@ -5,7 +5,7 @@ import (
 	"math"
 	"math/rand"
 	"time"
-	"vehicle-tracking/backend/types"
+	"vehicle-tracking/receiver/types"
 
 	"github.com/gorilla/websocket"
 )
