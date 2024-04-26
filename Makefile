@@ -6,6 +6,10 @@ receiver:
 	@go build -o bin/receiver.exe receiver/main.go
 	@./bin/receiver.exe
 
+distance:
+	@go build -o bin/distance.exe distance_calculator/main.go
+	@./bin/distance.exe
+
 test:
 	@echo testttttt
 
